@@ -1,8 +1,9 @@
 import tkinter as tk
 import Layer as Layer
 import Keys as K
+import Movable as Mov
 
-DEBUG = True
+DEBUG = False
 
 
 class Game(tk.Tk):
@@ -12,6 +13,7 @@ class Game(tk.Tk):
         if DEBUG:
             self.screen_width = 500
             self.screen_height = 500
+            Mov.BASE_SPEED = 1
         else:
             self.screen_width = self.winfo_screenwidth() + 20
             self.screen_height = self.winfo_screenheight() + 20
@@ -27,8 +29,15 @@ class Game(tk.Tk):
         self.keys = K.Keys(self)
 
         self.draw()
-
         self.mainloop()
+
+    def move_left(self):
+        self.layers.move_left()
+
+    def move_right(self):
+        self.layers.move_right()
+
+    def stop_moving_x(self): self.layers.stop_moving()
 
     def draw(self):
         self.layers.draw()
